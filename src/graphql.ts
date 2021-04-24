@@ -1,5 +1,6 @@
 import {GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt, GraphQLFloat, GraphQLNonNull, GraphQLList, GraphQLSchema} from "graphql";
 import {listings} from "./listings";
+
 const Listing = new GraphQLObjectType({
     name: "Listing",
     fields: {
@@ -31,9 +32,20 @@ const query = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
     name: "Mutation",
     fields: {
-        hello:{
-            type: GraphQLString,
-            resolve: () => "Hello from the mutation"
+        deleteListing:{
+            type: GraphQLNonNull(Listing),
+            args:{
+                id: {type: GraphQLNonNull(GraphQLID)}
+            },
+            resolve: (_root, {id}) =>{
+                for(let i = 0; i < listings.length; i++){
+                    if(listings[i].id === id){
+                        return listings.splice(i,1)[0];
+                    }
+                }
+
+                throw new Error("Failed to delete listing");
+            }
         }
     }
 });
