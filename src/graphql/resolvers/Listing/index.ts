@@ -1,8 +1,8 @@
 import {IResolvers} from "apollo-server-express"
-import {Database, Listing} from '../lib/types'
+import {Database, Listing} from '../../../lib/types'
 import { ObjectId } from 'mongodb';
 
-export const resolvers: IResolvers = {
+export const listingsResolvers: IResolvers = {
 
     Query: {
         // eslint-disable-next-line @typescript-eslint/ban-types
