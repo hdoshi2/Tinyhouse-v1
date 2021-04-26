@@ -57,7 +57,7 @@ const seed = async () => {
             await db.listings.insertOne(listing);
         }
 
-
+        console.log("[Seed]: Successful")
 
     } catch {
 
@@ -65,3 +65,5 @@ const seed = async () => {
 
     }
 }
+
+seed();
